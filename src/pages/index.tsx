@@ -7,35 +7,26 @@
 
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Home: NextPage = () => {
+  const chatRef = useRef<HTMLDivElement>(null);
+
   const [value, setValue] = useState("");
   const [chat, setChat] = useState([
     {
       sender: "system",
       text: "This is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.",
     },
-    {
-      sender: "bot",
-      text: "Hello! How can I help you today?",
-    },
+    { sender: "bot", text: "Hello! How can I help you today?" },
   ]);
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setLoading(true);
     const newChat = [
       ...chat,
-      {
-        sender: "user",
-        text: value,
-      },
-      {
-        sender: "bot",
-        text: "",
-      },
+      { sender: "user", text: value },
+      { sender: "bot", text: "" },
     ];
     setChat([...newChat]);
     setValue("");
@@ -56,8 +47,13 @@ const Home: NextPage = () => {
       newChat[newChat.length - 1]!.text = data.result;
       return newChat;
     });
-    setLoading(false);
   };
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [chat]);
 
   return (
     <>
@@ -66,25 +62,34 @@ const Home: NextPage = () => {
         <meta name="description" content="OpenAI API Test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex h-[100svh] flex-col items-center justify-between bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <main className="flex h-[100svh] flex-col items-center justify-between bg-gradient-to-b from-[#261f30] to-[#090a1f] text-white">
         <h1 className="p-8 text-3xl font-bold">OpenAI API Test</h1>
-        {loading ? (
-          <p className="animate-pulse">...</p>
-        ) : (
-          <div className="p-4 text-center text-xl font-medium">
-            {chat.map((message, i) =>
-              message.sender === "system" ? null : (
-                <p key={`message#${i}`}>
-                  {" "}
-                  {message.sender}: {message.text}
-                </p>
-              )
-            )}
-          </div>
-        )}
+
+        <div
+          ref={chatRef}
+          className="h-full w-full overflow-y-scroll text-center text-xl font-medium"
+        >
+          {chat.map((message, i) =>
+            message.sender === "system" ? null : (
+              <p
+                key={`message#${i}`}
+                className="h-max w-full p-4"
+                style={{
+                  backgroundColor:
+                    message.sender === "user" ? "#000000" : "#ffffff11",
+                }}
+              >
+                {message.text || (
+                  <span className="animate-pulse text-xl">...</span>
+                )}
+              </p>
+            )
+          )}
+        </div>
+
         <form
           onSubmit={handleSubmit}
-          className="relative flex h-12 w-full"
+          className="relative flex h-16 w-full"
           autoComplete="off"
         >
           <input
