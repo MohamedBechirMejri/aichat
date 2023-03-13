@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -43,14 +44,15 @@ export default async function handler(
       temperature: 0.6,
       max_tokens: 100,
     });
+    // @ts-ignore
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
+    // @ts-ignore
     if (error.response) {
-      console.error(error.response.status, error.response.data);
+      // @ts-ignore
       res.status(error.response.status).json(error.response.data);
     } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
       res.status(500).json({
         error: {
           message: "An error occurred during your request.",
