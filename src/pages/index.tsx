@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
+import axios from "axios";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
@@ -15,36 +16,27 @@ const Home: NextPage = () => {
   const [value, setValue] = useState("");
   const [chat, setChat] = useState([
     {
-      sender: "system",
-      text: "This is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.",
+      role: "system",
+      content:
+        "You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs",
     },
-    { sender: "bot", text: "Hello! How can I help you today?" },
   ]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const newChat = [
-      ...chat,
-      { sender: "user", text: value },
-      { sender: "bot", text: "" },
-    ];
+    const newChat = [...chat, { role: "user", content: value }];
     setChat([...newChat]);
     setValue("");
-    const prompt = newChat
-      .map((message) => `${message.sender}: ${message.text}`)
-      .filter((m, i) => i === 0 || i > newChat.length - 8)
-      .join("\n");
 
-    const res = await fetch("/api/ai", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
+    const res = await axios.post("/api/ai", {
+      prompt: newChat,
     });
-    const data = await res.json();
+    const data = res.data;
+
+    const { content, role } = data.result;
 
     setChat((chat) => {
-      const newChat = [...chat];
-      newChat[newChat.length - 1]!.text = data.result;
+      const newChat = [...chat, { role, content }];
       return newChat;
     });
   };
@@ -70,16 +62,16 @@ const Home: NextPage = () => {
           className="h-full w-full overflow-y-scroll text-center text-xl font-medium"
         >
           {chat.map((message, i) =>
-            message.sender === "system" ? null : (
+            message.role === "system" ? null : (
               <p
                 key={`message#${i}`}
                 className="h-max w-full p-4"
                 style={{
                   backgroundColor:
-                    message.sender === "user" ? "#000000" : "#ffffff11",
+                    message.role === "user" ? "#000000" : "#ffffff11",
                 }}
               >
-                {message.text || (
+                {message.content || (
                   <span className="animate-pulse text-xl">...</span>
                 )}
               </p>

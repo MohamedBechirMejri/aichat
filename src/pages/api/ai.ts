@@ -8,7 +8,11 @@
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { Configuration, OpenAIApi } from "openai";
+import {
+  type ChatCompletionRequestMessage,
+  Configuration,
+  OpenAIApi,
+} from "openai";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -28,40 +32,27 @@ export default async function handler(
     });
   }
 
-  const prompt: string = req.body.prompt || "";
-  if (prompt.trim().length === 0) {
-    return res.status(400).json({
-      error: {
-        message: "Please enter a valid prompt!",
-      },
-    });
-  }
+  const prompt: ChatCompletionRequestMessage[] = req.body.prompt;
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(prompt),
-      temperature: 0.6,
-      max_tokens: 1000,
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: generatePrompt(prompt),
     });
     // @ts-ignore
-    res.status(200).json({ result: completion.data.choices[0].text });
+    res.status(200).json({ result: completion.data.choices[0].message });
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     // @ts-ignore
-    if (error.response) {
+    if (error.response)
       // @ts-ignore
       res.status(error.response.status).json(error.response.data);
-    } else {
+    else
       res.status(500).json({
-        error: {
-          message: "An error occurred during your request.",
-        },
+        error: { message: "An error occurred during your request." },
       });
-    }
   }
 }
 
-function generatePrompt(prompt: string) {
-  return `${prompt}`;
+function generatePrompt(prompt: ChatCompletionRequestMessage[]) {
+  return [...prompt];
 }
