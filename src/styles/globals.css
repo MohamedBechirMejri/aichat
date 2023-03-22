@@ -5,3 +5,30 @@
 *::-webkit-scrollbar {
   display: none;
 }
+
+body {
+  background: hsla(219, 100%, 82%, 1);
+
+  background: radial-gradient(
+    circle,
+    hsla(219, 100%, 82%, 1) 0%,
+    hsla(221, 100%, 88%, 1) 48%,
+    hsla(0, 0%, 100%, 1) 100%
+  );
+
+  background: -moz-radial-gradient(
+    circle,
+    hsla(219, 100%, 82%, 1) 0%,
+    hsla(221, 100%, 88%, 1) 48%,
+    hsla(0, 0%, 100%, 1) 100%
+  );
+
+  background: -webkit-radial-gradient(
+    circle,
+    hsla(219, 100%, 82%, 1) 0%,
+    hsla(221, 100%, 88%, 1) 48%,
+    hsla(0, 0%, 100%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#A1C2FF", endColorstr="#C2D5FF", GradientType=1 );
+}
