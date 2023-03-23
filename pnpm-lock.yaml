@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@tailwindcss/forms': ^0.5.3
   '@types/eslint': ^8.21.1
   '@types/node': ^18.14.0
   '@types/prettier': ^2.7.2
@@ -20,6 +21,8 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   tailwindcss: ^3.2.0
+  tailwindcss-elevation: ^2.0.0
+  tailwindcss-no-scrollbar: ^1.0.1
   typescript: ^4.9.5
   zod: ^3.20.6
 
@@ -32,6 +35,7 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
+  '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.7
   '@types/eslint': 8.21.1
   '@types/node': 18.15.0
   '@types/prettier': 2.7.2
@@ -46,6 +50,8 @@ devDependencies:
   prettier: 2.8.4
   prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
   tailwindcss: 3.2.7_postcss@8.4.21
+  tailwindcss-elevation: 2.0.0_tailwindcss@3.2.7
+  tailwindcss-no-scrollbar: 1.0.1
   typescript: 4.9.5
 
 packages:
@@ -283,6 +289,15 @@ packages:
     dependencies:
       tslib: 2.5.0
     dev: false
+
+  /@tailwindcss/forms/0.5.3_tailwindcss@3.2.7:
+    resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.2.7_postcss@8.4.21
+    dev: true
 
   /@types/eslint/8.21.1:
     resolution: {integrity: sha512-rc9K8ZpVjNcLs8Fp0dkozd5Pt2Apk1glO4Vgz8ix1u6yFByxfqo5Yavpy65o+93TAe24jr7v+eSBtFLvOQtCRQ==}
@@ -1569,6 +1584,11 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /hex-rgb/4.3.0:
+    resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
+    engines: {node: '>=6'}
+    dev: true
+
   /ignore/5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
@@ -1889,6 +1909,11 @@ packages:
     dependencies:
       mime-db: 1.52.0
     dev: false
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: true
 
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -2569,6 +2594,19 @@ packages:
     dependencies:
       '@pkgr/utils': 2.3.1
       tslib: 2.5.0
+    dev: true
+
+  /tailwindcss-elevation/2.0.0_tailwindcss@3.2.7:
+    resolution: {integrity: sha512-ejQ9bCTiilb/aOF2l9fLF9sWGc2QvxepePTGlLIxGZzJpRYKODf1tJlIN51W9ho4tXD2GKbBb10jd3bKm3THKQ==}
+    peerDependencies:
+      tailwindcss: ^3.0.1
+    dependencies:
+      hex-rgb: 4.3.0
+      tailwindcss: 3.2.7_postcss@8.4.21
+    dev: true
+
+  /tailwindcss-no-scrollbar/1.0.1:
+    resolution: {integrity: sha512-6Jy3iFvlQ8hZ3TdM+c96GMk1hrPYZGxvUghIQvEGGzp6u2JP/iZGXMoOL3/R2Sb4VisUku0oz8NZ9MT4LTgu4w==}
     dev: true
 
   /tailwindcss/3.2.7_postcss@8.4.21:
