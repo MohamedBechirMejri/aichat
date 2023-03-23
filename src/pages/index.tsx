@@ -17,8 +17,71 @@ const Home: NextPage = () => {
   const [chat, setChat] = useState([
     {
       role: "system",
-      content:
-        "You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "assistant",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+    },
+    {
+      role: "user",
+      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
     },
   ]);
 
@@ -54,31 +117,48 @@ const Home: NextPage = () => {
         <meta name="description" content="OpenAI API Test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex h-[100svh] flex-col items-center justify-between bg-gradient-to-b from-[#261f30] to-[#090a1f] text-white">
-        <h1 className="p-8 text-3xl font-bold">OpenAI API Test</h1>
-
-        <div
-          ref={chatRef}
-          className="h-full w-full overflow-y-scroll text-center text-xl font-medium"
-        >
-          {chat.map((message, i) =>
-            message.role === "system" ? null : (
-              <p
-                key={`message#${i}`}
-                className="h-max w-full p-4"
-                style={{
-                  backgroundColor:
-                    message.role === "user" ? "#000000" : "#ffffff11",
-                }}
-              >
-                {message.content || (
-                  <span className="animate-pulse text-xl">...</span>
-                )}
-              </p>
-            )
-          )}
+      <main className="grid h-full max-w-5xl grid-rows-[1fr,auto]">
+        <div className="flex h-full flex-col items-center gap-2 overflow-y-scroll">
+          <h1 className="text-3xl font-bold">Welcome to AIChat</h1>
+          <p>Your AI powered friend</p>
+          <div>
+            <label htmlFor="api key">OpenAI API Key</label>
+            <input type="text" id="api key" />
+            <label htmlFor="system">System Message</label>
+            <textarea
+              id="system"
+              value={`You are a very funny person who makes jokes all the time, you
+              spaek like a teenager using weird slangs`}
+            />
+          </div>
+          <div
+            ref={chatRef}
+            className="flex h-full flex-col gap-6 overflow-y-scroll p-4 py-8 text-center text-lg font-medium"
+          >
+            {chat.map((message, i) =>
+              message.role === "system" ? null : (
+                <div
+                  key={`message#${i}`}
+                  className="flex h-max w-full"
+                  style={{
+                    justifyContent:
+                      message.role === "user" ? "flex-end" : "flex-start",
+                  }}
+                >
+                  {message.role === "user" ? (
+                    <p className="h-full max-w-[75%] rounded-2xl bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-4 text-white elevation-1">
+                      {message.content}
+                    </p>
+                  ) : (
+                    <p className="h-full max-w-[75%] rounded-2xl bg-white bg-opacity-60 p-2 px-4 elevation-1">
+                      {message.content}
+                    </p>
+                  )}
+                </div>
+              )
+            )}
+          </div>
         </div>
-
         <form
           onSubmit={handleSubmit}
           className="relative flex h-16 w-full"
