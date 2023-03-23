@@ -8,7 +8,6 @@ const config = {
     extend: {},
   },
   plugins: [
-    require("@tailwindcss/forms"),
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     require("tailwindcss-elevation")(["responsive"]),
     require("tailwindcss-no-scrollbar"),
