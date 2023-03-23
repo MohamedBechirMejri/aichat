@@ -9,7 +9,7 @@ const nunito = Nunito({ subsets: ["latin"] });
 const AIChat: AppType = ({ Component, pageProps }) => {
   return (
     <div
-      className="h-[100svh] bg-white bg-opacity-50 p-8 backdrop-blur"
+      className="h-[100svh] overflow-hidden bg-white bg-opacity-50 pt-8 backdrop-blur"
       style={nunito.style}
     >
       <Component {...pageProps} />
