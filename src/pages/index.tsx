@@ -120,7 +120,12 @@ const Home: NextPage = () => {
       </Head>
       <main className="grid h-full max-w-5xl grid-rows-[1fr,auto]">
         <div className="flex h-full flex-col items-center gap-2 overflow-y-scroll">
-          <h1 className="text-3xl font-bold">Welcome to AIChat</h1>
+          <h1 className="flex gap-1 text-3xl font-bold">
+            <span>Welcome to</span>
+            <span className="flex bg-gradient-to-tl from-blue-600 to-rose-400 bg-clip-text text-transparent">
+              AIChat
+            </span>
+          </h1>
           <p>Your AI powered friend</p>
           {/* <div>
             <label htmlFor="api key">OpenAI API Key</label>
