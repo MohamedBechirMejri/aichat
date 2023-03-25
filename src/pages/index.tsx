@@ -28,9 +28,7 @@ const Home: NextPage = () => {
     setChat([...newChat]);
     setValue("");
 
-    const res = await axios.post("/api/ai", {
-      prompt: newChat,
-    });
+    const res = await axios.post("/api/ai", { prompt: newChat });
     const data = res.data;
 
     const { content, role } = data.result;
@@ -39,6 +37,15 @@ const Home: NextPage = () => {
       const newChat = [...chat, { role, content }];
       return newChat;
     });
+  };
+
+  const handleClear = () => {
+    setChat([
+      {
+        role: "system",
+        content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -133,6 +140,7 @@ const Home: NextPage = () => {
             }}
             className="group flex h-12 flex-nowrap items-center justify-start gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-3 font-bold text-white"
             type="button"
+            onClick={handleClear}
           >
             <svg
               viewBox="0 0 24 24"
