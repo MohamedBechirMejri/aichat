@@ -123,9 +123,15 @@ const Home: NextPage = () => {
           autoComplete="off"
         >
           <motion.button
-            initial={{ width: "3rem" }}
+            initial={{ width: "3rem", y: 0 }}
             whileHover={{ width: "9rem" }}
-            className="group flex h-12 flex-nowrap items-center justify-start gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-3 pl-3 font-bold text-white elevation-1"
+            whileTap={{ y: 1.5 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeIn",
+              y: { duration: 0.1, ease: "linear" },
+            }}
+            className="group flex h-12 flex-nowrap items-center justify-start gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-3 font-bold text-white"
             type="button"
           >
             <svg
