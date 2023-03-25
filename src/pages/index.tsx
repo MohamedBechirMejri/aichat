@@ -20,70 +20,6 @@ const Home: NextPage = () => {
       role: "system",
       content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
     },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "assistant",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
-    {
-      role: "user",
-      content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-    },
   ]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -118,15 +54,15 @@ const Home: NextPage = () => {
         <meta name="description" content="OpenAI API Test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="grid h-full max-w-5xl grid-rows-[1fr,auto]">
-        <div className="flex h-full flex-col items-center gap-2 overflow-y-scroll">
+      <main className="grid h-full w-[min(64rem,100svw)] max-w-5xl grid-rows-[1fr,auto]">
+        <div className="flex h-full flex-col items-center gap-2 overflow-x-visible overflow-y-scroll">
           <h1 className="flex gap-1 text-3xl font-bold">
             <span>Welcome to</span>
             <span className="flex bg-gradient-to-tl from-blue-600 to-rose-400 bg-clip-text text-transparent">
               AIChat
             </span>
           </h1>
-          <p>Your AI powered friend</p>
+          <p className="font-medium">Your AI powered friend</p>
           {/* <div>
             <label htmlFor="api key">OpenAI API Key</label>
             <input type="text" id="api key" />
@@ -139,7 +75,7 @@ const Home: NextPage = () => {
           </div> */}
           <div
             ref={chatRef}
-            className="flex h-full flex-col gap-6 overflow-y-scroll p-4 py-8 text-center text-base font-medium"
+            className="flex h-full w-full flex-col gap-6 overflow-x-visible overflow-y-scroll scroll-smooth p-4 py-8 text-center text-base font-medium"
           >
             {chat.map((message, i) =>
               message.role === "system" ? null : (
@@ -152,13 +88,29 @@ const Home: NextPage = () => {
                   }}
                 >
                   {message.role === "user" ? (
-                    <p className="h-full max-w-[75%] rounded-2xl bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-4 text-white elevation-1">
+                    <motion.p
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: [0.9, 1.1, 1] }}
+                      transition={{
+                        delay: 0.2,
+                        ease: "easeIn",
+                      }}
+                      className="h-full max-w-[75%] rounded-2xl bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-4 text-white elevation-1"
+                    >
                       {message.content}
-                    </p>
+                    </motion.p>
                   ) : (
-                    <p className="h-full max-w-[75%] rounded-2xl bg-white bg-opacity-60 p-2 px-4 elevation-1">
+                    <motion.p
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: [0.9, 1.1, 1] }}
+                      transition={{
+                        delay: 0.2,
+                        ease: "easeIn",
+                      }}
+                      className="h-full max-w-[75%] rounded-2xl bg-white bg-opacity-60 p-2 px-4 elevation-1"
+                    >
                       {message.content}
-                    </p>
+                    </motion.p>
                   )}
                 </div>
               )
@@ -170,8 +122,10 @@ const Home: NextPage = () => {
           className="relative grid h-[6.5rem] w-full grid-cols-[auto,1fr] gap-2 px-4"
           autoComplete="off"
         >
-          <button
-            className="group flex h-12 w-12 flex-nowrap items-center justify-start gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-3 pl-3 font-bold text-white transition-all elevation-1 hover:w-[9rem]"
+          <motion.button
+            initial={{ width: "3rem" }}
+            whileHover={{ width: "9rem" }}
+            className="group flex h-12 flex-nowrap items-center justify-start gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-blue-700 p-2 px-3 pl-3 font-bold text-white elevation-1"
             type="button"
           >
             <svg
@@ -191,7 +145,7 @@ const Home: NextPage = () => {
             <span className="min-w-max shrink-0 opacity-0 transition-all group-hover:opacity-100">
               New Topic
             </span>
-          </button>
+          </motion.button>
           <div className="relative">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +156,9 @@ const Home: NextPage = () => {
               <path d="M0 1984q0-26 8-54t15-53q23-95 48-188t48-188q-59-110-89-230T0 1026q0-141 36-272t103-246 160-207 208-161T752 37t272-37q141 0 271 36t245 104 207 160 161 207 103 244 37 272q0 140-36 270t-103 245-159 208-206 161-244 104-271 37q-124 0-244-28t-230-86L79 2046q-10 2-15 2-27 0-45-18t-19-46zm1020-64q124 0 239-32t215-90 182-139 141-182 91-215 32-239q0-124-32-238t-90-214-141-181-182-140-214-90-238-32q-123 0-237 32t-214 90-181 139-140 181-91 213-32 238q0 65 8 120t23 107 36 105 48 109q8 16 8 31 0 11-6 41t-16 69-21 84-23 86-20 74-13 50q68-16 134-32t135-33q34-8 71-19t72-11q8 0 15 2t15 6q54 25 104 45t102 35 105 22 115 8zM704 896q-26 0-45-19t-19-45q0-26 19-45t45-19h640q26 0 45 19t19 45q0 26-19 45t-45 19H704zm0 384q-26 0-45-19t-19-45q0-26 19-45t45-19h384q26 0 45 19t19 45q0 26-19 45t-45 19H704z" />
             </svg>
             <motion.textarea
+              initial={{ height: "3rem" }}
               animate={{ height: value ? "6rem" : "3rem" }}
+              transition={{ duration: 0.5, ease: "easeIn" }}
               name="prompt"
               placeholder="Ask me Anything..."
               value={value}
@@ -216,7 +172,7 @@ const Home: NextPage = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.5 }}
                 className="absolute bottom-2 right-4 -translate-y-1/2 text-xs text-gray-500"
               >
                 {value.length}/200
