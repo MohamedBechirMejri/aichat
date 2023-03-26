@@ -122,6 +122,11 @@ const Home: NextPage = () => {
                 </div>
               )
             )}
+            {chat[chat.length - 1]?.role === "user" && (
+              <p className="animate-pulse px-4 text-left text-2xl font-bold">
+                ...
+              </p>
+            )}
           </div>
         </div>
         <form
