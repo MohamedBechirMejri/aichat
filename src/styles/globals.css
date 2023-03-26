@@ -32,3 +32,14 @@ body {
 
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#A1C2FF", endColorstr="#C2D5FF", GradientType=1 );
 }
+
+/* remove tap overlay */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* style selection */
+::selection {
+  background: hsla(219, 100%, 82%, 1);
+  color: hsla(0, 0%, 100%, 1);
+}
