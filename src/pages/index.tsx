@@ -66,12 +66,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="grid h-full w-[min(64rem,100svw)] max-w-5xl grid-rows-[1fr,auto]">
-        <button
+        {/* <button
           className="fixed top-4 right-4 z-10 text-2xl"
           onClick={() => setIsSettingsOpen(!isSettingsOpen)}
         >
           {isSettingsOpen ? <TfiClose /> : <TbSettings2 />}
-        </button>
+        </button> */}
         {!isSettingsOpen ? (
           <>
             <div className="flex h-full flex-col items-center gap-2 overflow-x-visible overflow-y-scroll">
