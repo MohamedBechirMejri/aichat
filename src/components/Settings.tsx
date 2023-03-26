@@ -1,6 +1,6 @@
 const Settings = () => {
   return (
-    <div className="gradientbg fixed top-1/2 right-0 grid h-full w-[100svw] -translate-y-1/2 grid-cols-1 grid-rows-[auto,1fr,auto] place-items-center gap-8 p-4">
+    <div className="gradientbg fixed top-0 left-0 grid h-full w-[100svw] grid-cols-1 grid-rows-[auto,1fr,auto] place-items-center gap-8 p-4 pt-8">
       <div className="flex w-full max-w-[34rem] flex-col gap-4">
         <label htmlFor="api key">OpenAI API Key</label>
         <input
