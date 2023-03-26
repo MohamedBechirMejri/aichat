@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
+import Settings from "~/components/Settings";
 
 const Home: NextPage = () => {
   const chatRef = useRef<HTMLDivElement>(null);
@@ -70,16 +71,6 @@ const Home: NextPage = () => {
             </span>
           </h1>
           <p className="font-medium">Your AI powered friend</p>
-          {/* <div>
-            <label htmlFor="api key">OpenAI API Key</label>
-            <input type="text" id="api key" />
-            <label htmlFor="system">System Message</label>
-            <textarea
-              id="system"
-              value={`You are a very funny person who makes jokes all the time, you
-              spaek like a teenager using weird slangs`}
-            />
-          </div> */}
           <div
             ref={chatRef}
             className="flex h-full w-full flex-col gap-6 overflow-x-visible overflow-y-scroll scroll-smooth p-4 py-8 text-center text-base font-medium"
@@ -216,6 +207,7 @@ const Home: NextPage = () => {
             )}
           </div>
         </form>
+        <Settings />
       </main>
     </>
   );

@@ -6,7 +6,8 @@
   display: none;
 }
 
-body {
+body,
+.gradientbg {
   background: hsla(219, 100%, 82%, 1);
 
   background: radial-gradient(
