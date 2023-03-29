@@ -198,7 +198,7 @@ const Home: NextPage = () => {
                     placeholder="Ask me Anything..."
                     value={value}
                     onKeyDown={(e) => {
-                      if (e.ctrlKey && e.key === "Enter") void handleSubmit(e);
+                      if (e.key === "Enter") void handleSubmit(e);
                     }}
                     onChange={(e) => setValue(e.target.value)}
                     className="flex w-full resize-none items-center justify-center rounded-[1.5rem] bg-white bg-opacity-60 p-3 px-12 outline-none elevation-1 placeholder:text-[#898989]"
