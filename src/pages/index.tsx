@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   const [apiKey, setApiKey] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [systemMessage, setSystemMessage] = useState(
-    `the assistant is called mel, she will provide info about the company (visionvortexes.com) and answer your questions.`
+    `the assistant is called mel, she will provide info about the company (vision vortexes) and answer your questions.`
   );
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
     const newChat = [...chat, { role: "user", content: value }];
     newChat[0]!.content =
       systemMessage ||
-      `the assistant is called mel, she will provide info about the company (visionvortexes.com) and answer your questions.`;
+      `the assistant is called mel, she will provide info about the company (vision vortexes) and answer your questions.`;
     setChat([...newChat]);
     setValue("");
 
