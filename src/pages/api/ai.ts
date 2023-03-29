@@ -58,7 +58,7 @@ const generatePrompt = (prompt: ChatCompletionRequestMessage[]) => {
       .map((msg, i) =>
         i === 0 || i > prompt.length - 10 ? `${msg.role}: ${msg.content}\n` : ""
       )
-      .join("") + "Assistant: ";
+      .join("") + "assistant: ";
   console.log(promptString);
   return promptString;
 };
