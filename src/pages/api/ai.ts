@@ -14,45 +14,51 @@ import {
   OpenAIApi,
 } from "openai";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (!configuration.apiKey) {
-    return res.status(500).json({
+  const prompt: ChatCompletionRequestMessage[] = req.body.prompt;
+  const { model, apiKey }: { model: string; apiKey: string } = req.body;
+
+  if (!prompt || !model)
+    return res.status(400).json({
       error: {
         message:
-          "OpenAI API key not configured, please follow instructions in README.md",
+          "You must provide a prompt, model, and API key to use this endpoint.",
       },
     });
-  }
 
-  const prompt: ChatCompletionRequestMessage[] = req.body.prompt;
+  const configuration = new Configuration({
+    apiKey: apiKey || process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(configuration);
 
-  try {
+  if (model === "gpt-3.5-turbo") {
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: generatePrompt(prompt),
+      model,
+      messages: [...prompt],
     });
     // @ts-ignore
     res.status(200).json({ result: completion.data.choices[0].message });
-  } catch (error) {
+  } else {
+    const completion = await openai.createCompletion({
+      model,
+      prompt: generatePrompt(prompt),
+      max_tokens: 100,
+    });
     // @ts-ignore
-    if (error.response)
-      // @ts-ignore
-      res.status(error.response.status).json(error.response.data);
-    else
-      res.status(500).json({
-        error: { message: "An error occurred during your request." },
-      });
+    res.status(200).json({ result: completion.data.choices[0].text });
   }
 }
 
-function generatePrompt(prompt: ChatCompletionRequestMessage[]) {
-  return [...prompt];
-}
+const generatePrompt = (prompt: ChatCompletionRequestMessage[]) => {
+  const promptString =
+    prompt
+      .map((msg, i) =>
+        i === 0 || i > prompt.length - 10 ? `${msg.role}: ${msg.content}\n` : ""
+      )
+      .join("") + "Assistant: ";
+  console.log(promptString);
+  return promptString;
+};

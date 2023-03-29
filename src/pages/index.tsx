@@ -46,7 +46,10 @@ const Home: NextPage = () => {
     const { content, role } = data.result;
 
     setChat((chat) => {
-      const newChat = [...chat, { role, content }];
+      const newChat = [
+        ...chat,
+        { role: role || "assistant", content: content || data.result },
+      ];
       return newChat;
     });
   };
@@ -68,14 +71,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mx-auto grid h-full w-[min(64rem,100svw)] max-w-5xl grid-rows-[1fr,auto]">
+        <button
+          className="fixed top-4 right-4 z-10 text-2xl"
+          onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+        >
+          {isSettingsOpen ? <TfiClose /> : <TbSettings2 />}
+        </button>
         <AnimatePresence>
-          <button
-            className="fixed top-4 right-4 z-10 text-2xl"
-            onClick={() => setIsSettingsOpen(!isSettingsOpen)}
-          >
-            {isSettingsOpen ? <TfiClose /> : <TbSettings2 />}
-          </button>
-
           {!isSettingsOpen ? (
             <>
               <motion.div
