@@ -21,23 +21,26 @@ const Home: NextPage = () => {
   const [chat, setChat] = useState([
     {
       role: "system",
-      content: `the assistant is called mel, she will provide info about the company (visionvortexes.com) and answer your questions.`,
+      content: `the assistant is called mel, she will provide info about the company (Vision Vortexes) and answer your questions.`,
     },
   ]);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [apiKeys, setApiKeys] = useState("");
-  const [model, setModel] = useState("davinci");
+  const [apiKey, setApiKey] = useState("");
+  const [model, setModel] = useState("gpt-3.5-turbo");
   const [systemMessage, setSystemMessage] = useState(
-    "You are a very funny person who makes jokes all the time, you speak like a teenager using weird slangs"
+    `the assistant is called mel, she will provide info about the company (visionvortexes.com) and answer your questions.`
   );
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const newChat = [...chat, { role: "user", content: value }];
+    newChat[0]!.content =
+      systemMessage ||
+      `the assistant is called mel, she will provide info about the company (visionvortexes.com) and answer your questions.`;
     setChat([...newChat]);
     setValue("");
 
-    const res = await axios.post("/api/ai", { prompt: newChat });
+    const res = await axios.post("/api/ai", { prompt: newChat, apiKey, model });
     const data = res.data;
 
     const { content, role } = data.result;
@@ -70,7 +73,7 @@ const Home: NextPage = () => {
         <meta name="description" content="OpenAI API Test" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="grid h-full w-[min(64rem,100svw)] max-w-5xl grid-rows-[1fr,auto] mx-auto">
+      <main className="mx-auto grid h-full w-[min(64rem,100svw)] max-w-5xl grid-rows-[1fr,auto]">
         <AnimatePresence>
           <button
             className="fixed top-4 right-4 z-10 text-2xl"
@@ -238,7 +241,14 @@ const Home: NextPage = () => {
               </motion.form>
             </>
           ) : (
-            <Settings />
+            <Settings
+              apiKey={apiKey}
+              setApiKey={setApiKey}
+              model={model}
+              setModel={setModel}
+              systemMessage={systemMessage}
+              setSystemMessage={setSystemMessage}
+            />
           )}
         </AnimatePresence>
       </main>

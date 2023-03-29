@@ -1,6 +1,20 @@
 import { motion } from "framer-motion";
 
-const Settings = () => {
+const Settings = ({
+  apiKey,
+  setApiKey,
+  model,
+  setModel,
+  systemMessage,
+  setSystemMessage,
+}: {
+  apiKey: string;
+  setApiKey: (apiKey: string) => void;
+  model: string;
+  setModel: (model: string) => void;
+  systemMessage: string;
+  setSystemMessage: (systemMessage: string) => void;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -15,6 +29,8 @@ const Settings = () => {
             type="text"
             id="api key"
             className="h-12 rounded-2xl p-2 outline-none elevation-2"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -22,6 +38,8 @@ const Settings = () => {
           <select
             id="model"
             className="h-12 rounded-2xl p-2 outline-none elevation-2"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
           >
             <option value="gpt-3.5-turbo">chatGPT (gpt-3.5-turbo)</option>
             <option value="davinci">GPT3 (Davinci)</option>
@@ -37,7 +55,8 @@ const Settings = () => {
         <textarea
           id="system"
           className=" h-full rounded-2xl p-2 outline-none elevation-2"
-          value={`You are a very funny person who makes jokes all the time, you speak like a teenager using weird slangs`}
+          value={systemMessage}
+          onChange={(e) => setSystemMessage(e.target.value)}
         />
       </div>
       <footer className="flex flex-col justify-center p-2 py-8">
