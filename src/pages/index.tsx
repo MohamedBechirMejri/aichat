@@ -52,18 +52,12 @@ const Home: NextPage = () => {
   };
 
   const handleClear = () => {
-    setChat([
-      {
-        role: "system",
-        content: `You are a very funny person who makes jokes all the time, you spaek like a teenager using weird slangs`,
-      },
-    ]);
+    setChat([{ role: "system", content: systemMessage }]);
   };
 
   useEffect(() => {
-    if (chatRef.current) {
+    if (chatRef.current)
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    }
   }, [chat]);
 
   return (
