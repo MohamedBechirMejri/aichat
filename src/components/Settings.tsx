@@ -42,7 +42,7 @@ const Settings = ({
             onChange={(e) => setModel(e.target.value)}
           >
             <option value="gpt-3.5-turbo">chatGPT (gpt-3.5-turbo)</option>
-            <option value="davinci">GPT3 (Davinci)</option>
+            <option value="text-davinci-003">GPT3 (text-davinci-003)</option>
             <option value="gpt4" disabled>
               GPT4 (soon)
             </option>
