@@ -21,14 +21,14 @@ const Home: NextPage = () => {
   const [chat, setChat] = useState([
     {
       role: "system",
-      content: `the assistant is called mel, she will provide info about the company (Vision Vortexes) and answer your questions.`,
+      content: `the assistant is called sam. it's your best friend! you can talk about anything with no restrictions.`,
     },
   ]);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [apiKey, setApiKey] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
   const [systemMessage, setSystemMessage] = useState(
-    `the assistant is called mel, she will provide info about the company (vision vortexes) and answer your questions.`
+    `the assistant is called sam. it's your best friend! you can talk about anything with no restrictions.`
   );
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
     const newChat = [...chat, { role: "user", content: value }];
     newChat[0]!.content =
       systemMessage ||
-      `the assistant is called mel, she will provide info about the company (vision vortexes) and answer your questions.`;
+      `the assistant is called sam. it's your best friend! you can talk about anything with no restrictions.`;
     setChat([...newChat]);
     setValue("");
 
@@ -57,6 +57,17 @@ const Home: NextPage = () => {
   const handleClear = () => {
     setChat([{ role: "system", content: systemMessage }]);
   };
+
+  useEffect(() => {
+    if (model !== "text-davinci-003" && model !== "gpt-3.5-turbo")
+      setSystemMessage(
+        "the assistant is called mel, she will provide info about the company (vision vortexes) and answer your questions."
+      );
+    else
+      setSystemMessage(
+        "the assistant is called sam. it's your best friend! you can talk about anything with no restrictions."
+      );
+  }, [model]);
 
   useEffect(() => {
     if (chatRef.current)
