@@ -5,14 +5,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
-import axios from "axios";
-import { AnimatePresence, motion } from "framer-motion";
 import { type NextPage } from "next";
+
 import Head from "next/head";
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import Settings from "~/components/Settings";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { TbSettings2 } from "react-icons/tb";
 import { TfiClose } from "react-icons/tfi";
+
+import Settings from "~/components/Settings";
 
 const Home: NextPage = () => {
   const chatRef = useRef<HTMLDivElement>(null);
