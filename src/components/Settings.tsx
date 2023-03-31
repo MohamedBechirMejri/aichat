@@ -46,7 +46,9 @@ const Settings = ({
             <option value="gpt4" disabled>
               GPT4 (soon)
             </option>
-            <option value="curie">VisionVortexes </option>
+            <option value="davinci:ft-mbm-2023-03-31-13-05-14">
+              VisionVortexes{" "}
+            </option>
           </select>
         </div>
       </div>
