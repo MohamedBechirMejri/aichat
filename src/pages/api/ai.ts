@@ -48,6 +48,7 @@ export default async function handler(
       max_tokens: 100,
       stop: ["\n"],
     });
+
     // @ts-ignore
     res.status(200).json({ result: completion.data.choices[0].text });
   }
