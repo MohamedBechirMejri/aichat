@@ -1,4 +1,4 @@
-import { openai } from "./api.cjs";
+import { openai } from "./api.mjs";
 import fs from "fs";
 
 async function upload() {

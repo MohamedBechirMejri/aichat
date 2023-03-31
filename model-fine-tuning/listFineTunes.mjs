@@ -1,4 +1,4 @@
-import { openai } from "./api.cjs";
+import { openai } from "./api.mjs";
 
 async function listFineTunes() {
   try {
