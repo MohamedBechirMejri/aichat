@@ -40,7 +40,7 @@ export default async function handler(
       messages: [...prompt],
     });
     // @ts-ignore
-    res.status(200).json({ result: completion.data.choices[0].message });
+    return res.status(200).json({ result: completion.data.choices[0].message });
   } else {
     const completion = await openai.createCompletion({
       model,
@@ -50,7 +50,7 @@ export default async function handler(
     });
 
     // @ts-ignore
-    res.status(200).json({ result: completion.data.choices[0].text });
+    return res.status(200).json({ result: completion.data.choices[0].text });
   }
 }
 
